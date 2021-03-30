@@ -1,4 +1,4 @@
-package com.forestdevelopers.calculator
+ package com.forestdevelopers.calculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -71,6 +71,14 @@ class MainActivity : AppCompatActivity() {
                 text_display.append(".")
                 numberFloatCheck = true
             }
+
+            R.id.button_percent -> {
+                text_display.append("%")
+                operation = "percent"
+                initializePercentVariable()
+                clearResult()
+            }
+
             R.id.button_plus -> {
                 initializeVariableFirst()
                 operation = "add"
@@ -110,9 +118,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun initializePercentVariable() {
+        try {
+                val input = textView.text.toString().toDouble()
+                val number = input / 100
+                input1 = number.toString()
+                Toast.makeText(baseContext,number.toString(),Toast.LENGTH_LONG).show()
+
+        }catch (e:Exception) {
+            Toast.makeText(baseContext,"Enter Correct Number", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
     private fun initializeVariableFirst() {
         try {
-                input1 = textView.text.toString()
+            input1 = textView.text.toString()
         }
         catch (e:Exception) {
             Toast.makeText(baseContext,"Enter Correct Number", Toast.LENGTH_SHORT).show()
@@ -122,6 +143,7 @@ class MainActivity : AppCompatActivity() {
     private fun initializeVariableSecond() {
         try {
             input2 = textView.text.toString()
+            Toast.makeText(baseContext,input2,Toast.LENGTH_LONG).show()
             result()
         }
         catch (e:Exception) {
@@ -141,33 +163,21 @@ class MainActivity : AppCompatActivity() {
         when(operation) {
             "add" -> {
                 if (numberFloatCheck) {
-                    val result: Double
-                    val add1 = input1.toDouble()
-                    val add2 = input2.toDouble()
-                    result = add1 + add2
+                    val result: Double = input1.toDouble() + input2.toDouble()
                     textView.text = result.toString()
                 }
                 else {
-                    val result: Int
-                    val add1 = Integer.parseInt(input1)
-                    val add2= Integer.parseInt(input2)
-                    result = add1 + add2
+                    val result: Int = Integer.parseInt(input1) + Integer.parseInt(input2)
                     textView.text = result.toString()
                 }
             }
             "sub" -> {
                 if (numberFloatCheck) {
-                    val result: Double
-                    val sub1 = input1.toDouble()
-                    val sub2 = input2.toDouble()
-                    result = sub1 - sub2
+                    val result: Double = input1.toDouble() - input2.toDouble()
                     textView.text = result.toString()
                 }
                 else {
-                    val result: Int
-                    val sub1 = Integer.parseInt(input1)
-                    val sub2 = Integer.parseInt(input2)
-                    result = sub1 - sub2
+                    val result: Int = Integer.parseInt(input1) - Integer.parseInt(input2)
                     textView.text = result.toString()
                 }
 
@@ -175,17 +185,11 @@ class MainActivity : AppCompatActivity() {
 
             "mul" -> {
                 if (numberFloatCheck) {
-                    val result: Double
-                    val mul1 = input1.toDouble()
-                    val mul2 = input2.toDouble()
-                    result = mul1 * mul2
+                    val result: Double = input1.toDouble() * input2.toDouble()
                     textView.text = result.toString()
                 }
                 else {
-                    val result: Int
-                    val mul1 = Integer.parseInt(input1)
-                    val mul2 = Integer.parseInt(input2)
-                    result = mul1 * mul2
+                    val result: Int = Integer.parseInt(input1) * Integer.parseInt(input2)
                     textView.text = result.toString()
                 }
             }
@@ -193,23 +197,21 @@ class MainActivity : AppCompatActivity() {
             "div" -> {
                 if (input2 == "0")
                 {
-                    textView.text = "infinity"
+                    textView.text = getString(R.string.infinity)
                     return
                 }
                 if (numberFloatCheck) {
-                    val result: Double
-                    val div1 = input1.toDouble()
-                    val div2 = input2.toDouble()
-                    result = div1 / div2
+                    val result: Double = input1.toDouble() / input2.toDouble()
                     textView.text = result.toString()
                 }
                 else {
-                    val result: Int
-                    val mul1 = Integer.parseInt(input1)
-                    val mul2 = Integer.parseInt(input2)
-                    result = mul1 / mul2
+                    val result: Int = Integer.parseInt(input1) / Integer.parseInt(input2)
                     textView.text = result.toString()
                 }
+            }
+            "percent" -> {
+                    val result: Double = input1.toDouble() * input2.toDouble()
+                    textView.text = result.toString()
             }
         }
         numberFloatCheck = false
