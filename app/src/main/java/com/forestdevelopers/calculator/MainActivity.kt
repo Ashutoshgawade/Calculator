@@ -123,7 +123,6 @@ class MainActivity : AppCompatActivity() {
                 val input = textView.text.toString().toDouble()
                 val number = input / 100
                 input1 = number.toString()
-                Toast.makeText(baseContext,number.toString(),Toast.LENGTH_LONG).show()
 
         }catch (e:Exception) {
             Toast.makeText(baseContext,"Enter Correct Number", Toast.LENGTH_SHORT).show()
@@ -143,7 +142,6 @@ class MainActivity : AppCompatActivity() {
     private fun initializeVariableSecond() {
         try {
             input2 = textView.text.toString()
-            Toast.makeText(baseContext,input2,Toast.LENGTH_LONG).show()
             result()
         }
         catch (e:Exception) {
