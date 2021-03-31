@@ -79,6 +79,17 @@ class MainActivity : AppCompatActivity() {
                 clearResult()
             }
 
+            R.id.button_clear -> {
+                var str = text_display.text.toString()
+                var str2 = textView.text.toString()
+                if (str.isNotEmpty() && str2.isNotEmpty()) {
+                    str = str.substring(0,str.length - 1)
+                    str2 = str2.substring(0,str2.length - 1)
+                    text_display.text = str
+                    textView.text = str2
+                }
+            }
+
             R.id.button_plus -> {
                 initializeVariableFirst()
                 operation = "add"
@@ -141,6 +152,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initializeVariableSecond() {
         try {
+
             input2 = textView.text.toString()
             result()
         }
